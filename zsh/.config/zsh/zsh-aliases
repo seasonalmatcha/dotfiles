@@ -1,0 +1,84 @@
+if (( $+commands[open] )); then
+  alias o='open .'
+elif (( $+commands[explorer.exe] )); then
+  alias o='explorer.exe .'
+fi
+
+if (( $+commands[batcat] )); then
+  alias cat='batcat'
+elif (( $+commands[bat] )); then
+  alias cat=bat
+fi
+
+if (( $+commands[minikube] )); then
+  alias kubectl="minikube kubectl --"
+fi
+
+if (( $+commands[lazydocker] )); then
+  alias lzd="lazydocker"
+fi
+
+alias c=clear
+alias dev='cd ~/dev'
+alias ls='lsd'
+alias ll='lsd -al'
+alias la='lsd -a'
+alias g='git'
+alias ga='git add'
+alias gaa='git add .'
+alias gai='git add -i'
+alias gb='git branch'
+alias gc='git checkout'
+alias gcb='git checkout -b'
+alias gcl='git clone'
+alias gcm='git commit'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gdt='git difftool'
+alias gl='git log'
+alias glo='git log --oneline --graph'
+alias gp='git push'
+alias gpl='git pull'
+alias gpm='git push origin master'
+alias gpt='git push --tags'
+alias gpu='git push -u origin'
+alias gr='git rebase'
+alias grf='git reflog'
+alias gri='git rebase -i'
+alias grs='git restore'
+alias gs='git status'
+alias gst='git stash'
+alias gsw='git switch'
+alias gw='git worktree'
+alias gwa='git worktree add'
+alias gwl='git worktree list'
+alias gwr='git worktree remove'
+alias k='zellij'
+alias ka='zellij a'
+alias kd='zellij d'
+alias kda='zellij da'
+alias kls='zellij ls'
+alias kn='zellij -s'
+alias lg='lazygit'
+alias n='npm'
+alias ni='npm i'
+alias nr='npm run'
+alias nrb='npm run build'
+alias nrd='npm run dev'
+alias nrl='npm run lint'
+alias nrt='npm run test'
+alias pn='pnpm'
+alias pna='pnpm add'
+alias pnb='pnpm build'
+alias pnd='pnpm dev'
+alias pnl='pnpm lint'
+alias pnt='pnpm test'
+alias rsc='source $ZDOTDIR/.zshrc'
+alias t='tmux'
+alias tn='tmux new -s'
+alias ta='tmux attach -t'
+alias td='tmux detach'
+alias tls='tmux ls'
+alias v='nvim'
+alias vim='nvim'
+alias xx='exit'
