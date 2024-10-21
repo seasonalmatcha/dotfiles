@@ -6,16 +6,17 @@ return {
     local map = utils.map
     local aucmd = utils.aucmd
     local conform = require("conform")
+    local js_formatter = { "prettierd", "prettier", stop_after_first = true }
 
     conform.setup({
       formatters_by_ft = {
         lua = { "stylua" },
-        typescript = { { "prettierd", "prettier" } },
-        typescriptreact = { { "prettierd", "prettier" } },
-        javascript = { { "prettierd", "prettier" } },
-        javascriptreact = { { "prettierd", "prettier" } },
-        json = { { "prettierd", "prettier" } },
-        markdown = { { "prettierd", "prettier" } },
+        typescript = js_formatter,
+        typescriptreact = js_formatter,
+        javascript = js_formatter,
+        javascriptreact = js_formatter,
+        json = js_formatter,
+        markdown = js_formatter,
         go = { "gofumpt", "goimports", "golines" },
         prisma = { "prismaFmt" },
         ["_"] = { "trim_whitespace" },
