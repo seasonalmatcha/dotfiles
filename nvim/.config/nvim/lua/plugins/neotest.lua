@@ -6,6 +6,7 @@ return {
     "nvim-neotest/nvim-nio",
     "antoinemadec/FixCursorHold.nvim",
     "marilari88/neotest-vitest",
+    "nvim-neotest/neotest-go",
   },
   config = function()
     local map = require("utils").map
@@ -13,6 +14,7 @@ return {
 
     neotest.setup({
       adapters = {
+        require("neotest-go"),
         require("neotest-vitest"),
       },
       status = { virtual_text = true },
