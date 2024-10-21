@@ -17,7 +17,7 @@ return {
         javascriptreact = js_formatter,
         json = js_formatter,
         markdown = js_formatter,
-        go = { "gofumpt", "goimports", "golines" },
+        go = { "gofumpt", "goimports-reviser", "golines" },
         prisma = { "prismaFmt" },
         ["_"] = { "trim_whitespace" },
       },

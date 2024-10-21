@@ -1,19 +1,20 @@
 local ensure_installed = {
-  "lua-language-server",
   "dockerfile-language-server",
+  "emmet-language-server",
+  "goimports-reviser",
+  "gofumpt",
+  "golangci-lint",
+  "golines",
   "gopls",
+  "lua-language-server",
   "prettierd",
   "prisma-language-server",
-  "sqlls",
-  "typescript-language-server",
-  "golines",
-  "goimports",
-  "golines",
   "rust-analyzer",
-  "emmet-language-server",
+  "sqlls",
   "stylua",
   "tailwindcss-language-server",
   "templ",
+  "typescript-language-server",
 }
 
 return {
@@ -44,11 +45,6 @@ return {
       }
 
       local on_attach = function(_, bufnr)
-        local function buf_set_option(...)
-          vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
         local opts = { buffer = bufnr, noremap = true, silent = true }
 
         map("n", "gD", function()
