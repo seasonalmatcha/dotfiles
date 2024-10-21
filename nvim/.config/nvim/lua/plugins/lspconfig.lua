@@ -34,7 +34,7 @@ return {
       vim.g.mason_binaries_list = ensure_installed
 
       local servers = {
-        "tsserver",
+        "ts_ls",
         "prismals",
         "dockerls",
         "tailwindcss",
