@@ -1,4 +1,21 @@
 local map = require("utils").map
+local switch_case = require("switch_case")
+
+-- Switch case
+-- toggle pascal-snake case
+map("n", "ty", function()
+  switch_case.toggle_pascal_snake_case()
+end)
+
+-- toggle camel-snake case
+map("n", "tu", function()
+  switch_case.toggle_camel_snake_case()
+end)
+
+-- toggle camel-pascal case
+map("n", "ti", function()
+  switch_case.toggle_camel_pascal_case()
+end)
 
 -- Escapes
 map({ "i", "c" }, "jk", "<esc>")
