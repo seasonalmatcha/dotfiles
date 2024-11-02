@@ -18,6 +18,14 @@ if (( $+commands[lazydocker] )); then
   alias lzd="lazydocker"
 fi
 
+if (( $+commands[fzf] )); then
+  if (( $+commands[bat] )); then
+    alias f="fzf --preview 'bat --color=always --style=numbers {}'"
+  elif (( $+commands[batcat] )); then
+    alias f="fzf --preview 'batcat --color=always --style=numbers {}'"
+  fi
+fi
+
 alias c=clear
 alias dev='cd ~/dev'
 alias ls='lsd'
