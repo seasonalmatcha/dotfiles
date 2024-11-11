@@ -18,6 +18,10 @@ if (( $+commands[lazydocker] )); then
   alias lzd="lazydocker"
 fi
 
+if (( $+commands[yazi] )); then
+  alias y="yazi"
+fi
+
 if (( $+commands[fzf] )); then
   if (( $+commands[bat] )); then
     alias f="fzf --preview 'bat --color=always --style=numbers {}'"
