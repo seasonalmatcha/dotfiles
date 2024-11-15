@@ -12,6 +12,7 @@ return {
       },
       disable_inline_completion = false,
       disable_keymaps = false,
+      ignore_filetypes = { "oil", "neo-tree" },
     })
   end,
 }
