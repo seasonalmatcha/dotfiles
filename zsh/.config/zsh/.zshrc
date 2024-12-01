@@ -21,6 +21,7 @@ source "$ZDOTDIR/zsh-functions"
 
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-exports"
+zsh_add_file "zsh-lazyload"
 
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
@@ -104,3 +105,5 @@ fi
 if (( $+commands[fzf] )); then
   eval "$(fzf --zsh)"
 fi
+
+lazyload nvm -- 'source "$NVM_DIR/nvm.sh"'
