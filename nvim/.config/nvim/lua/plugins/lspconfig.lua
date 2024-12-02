@@ -46,6 +46,7 @@ return {
 
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
+        local float_opts = { float = { border = "rounded" } }
 
         map("n", "gD", function()
           vim.lsp.buf.declaration()
@@ -75,16 +76,16 @@ return {
           vim.lsp.buf.code_action()
         end, opts)
         map("n", "[d", function()
-          vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+          vim.diagnostic.goto_prev(float_opts)
         end, opts)
         map("n", "]d", function()
-          vim.diagnostic.goto_next({ float = { border = "rounded" } })
+          vim.diagnostic.goto_next(float_opts)
         end, opts)
         map("n", "<leader>kk", function()
-          vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+          vim.diagnostic.goto_prev(float_opts)
         end, opts)
         map("n", "<leader>jj", function()
-          vim.diagnostic.goto_next({ float = { border = "rounded" } })
+          vim.diagnostic.goto_next(float_opts)
         end, opts)
         map("n", "<leader>lr", "<cmd> LspRestart <cr>")
       end
