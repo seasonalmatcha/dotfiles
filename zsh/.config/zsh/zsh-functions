@@ -72,3 +72,68 @@ function killport() {
   sudo kill -9 `sudo lsof -t -i:$1`
 }
 
+# Git clone bare with custom bare directory
+# Usage: gwcl <url> <dir>
+function gwcl() {
+  local url=$1
+  local dir=$2
+  local bare=".bare"
+
+  if ! [[ -n $url ]]; then
+    echo "[ERROR]: url is not provided"
+    return 1
+  fi
+
+  if ! [[ -n $dir ]]; then
+    echo "[ERROR]: directory name is not provided"
+    return 1
+  fi
+
+  if [[ -d $dir ]]; then
+    echo "[ERROR]: directory '$dir' already exists"
+    return 1
+  fi
+
+  mkdir -p "$dir"
+  pushd "$dir" > /dev/null
+  git clone --bare "$url" ".git"
+  git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  remote_head_branch=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+  local_default_branch=$(git config --global init.defaultBranch)
+
+  if [[ -z $remote_head_branch ]]; then
+    echo "Remote default branch cannot be determined. Skipping default worktree creation"
+    return 0
+  fi
+
+  if [[ -z $local_default_branch ]]; then
+    echo "Local default branch cannot be determined. Skipping default worktree creation"
+    return 0
+  fi
+
+  git fetch
+  git branch --set-upstream-to="origin/$remote_head_branch" "$local_default_branch"
+  git worktree add "./$local_default_branch" "$local_default_branch"
+
+  popd > /dev/null
+  echo "Done"
+}
+
+# Git worktree add with new branch in a directory with the same name as the branch
+# Usage: gwab <branch-name> <commit-ish>
+function gwab() {
+  local branch=$1
+  local commit=$2
+
+  if ! [[ -n $branch ]]; then
+    echo "[ERROR]: branch name is not provided"
+    return
+  fi
+
+  if ! [[ -n $commit ]]; then
+    echo "[ERROR]: commit-ish name is not provided"
+    return
+  fi
+
+  git worktree add "./$branch" -b "$branch" "$commit"
+}
