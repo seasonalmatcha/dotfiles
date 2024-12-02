@@ -27,6 +27,7 @@ zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "zsh-users/zsh-completions"
 zsh_add_plugin "Aloxaf/fzf-tab"
+zsh_add_plugin "undg/zsh-nvm-lazy-load"
 
 autoload -Uz compinit;
 compinit
@@ -105,5 +106,3 @@ fi
 if (( $+commands[fzf] )); then
   eval "$(fzf --zsh)"
 fi
-
-lazyload nvm -- 'source "$NVM_DIR/nvm.sh"'
