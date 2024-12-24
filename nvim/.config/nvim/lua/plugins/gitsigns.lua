@@ -32,18 +32,11 @@ return {
       on_attach = function()
         local gs = package.loaded.gitsigns
 
-        map("n", "gj", function()
-          gs.next_hunk()
-        end)
-        map("n", "gk", function()
-          gs.prev_hunk()
-        end)
-        map("n", "<leader>gr", function()
-          gs.reset_hunk()
-        end)
-        map("n", "<leader>gd", function()
-          gs.diffthis()
-        end)
+        map("n", "gj", gs.next_hunk)
+        map("n", "gk", gs.prev_hunk)
+        map("n", "<leader>gr", gs.reset_hunk)
+        map("n", "<leader>gd", gs.diffthis)
+        map("n", "<leader>gp", gs.preview_hunk)
       end,
     })
   end,
