@@ -1,7 +1,6 @@
 return {
   "echasnovski/mini.indentscope",
   version = "*",
-  enabled = true,
   config = function()
     local indent = require("mini.indentscope")
     indent.setup({
