@@ -22,11 +22,13 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
+      "saghen/blink.cmp",
     },
     config = function()
       local map = require("utils").map
       require("mason").setup()
       local lspconfig = require("lspconfig")
+      local blink = require("blink.cmp")
 
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
@@ -93,6 +95,7 @@ return {
       for _, server in ipairs(servers) do
         lspconfig[server].setup({
           on_attach = on_attach,
+          capabilities = blink.get_lsp_capabilities(),
         })
       end
 
