@@ -29,7 +29,9 @@ map({ "n" }, "<esc>", "<cmd> noh <cr>")
 map("n", "<leader>q", ":q<cr>")
 map("n", "<leader>w", ":w<cr>")
 map("n", "<leader>qwe", ":qa!<cr>")
-map("n", "<leader>d", ":bdelete<cr> :bnext<cr>")
+map("n", "<leader>d", ":bd<cr> :bnext<cr>")
+map("n", "<leader>da", ":%bd<cr> :bnext<cr>")
+map("n", "<leader>daa", ":%bd!<cr> :bnext<cr>")
 
 -- Move line/block
 map("i", "<a-j>", "<esc>:m .+<cr>==gi")

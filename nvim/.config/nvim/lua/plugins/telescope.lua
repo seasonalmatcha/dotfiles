@@ -76,7 +76,6 @@ return {
     map("n", ";j", builtin.jumplist)
     map("n", ";g", builtin.git_status)
     map("n", ";h", builtin.help_tags)
-    map("n", ";g", builtin.git_status)
     map("n", "gl", function()
       builtin.lsp_definitions({ jump_type = "vsplit" })
     end)
