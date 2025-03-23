@@ -1,15 +1,43 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-context",
+    },
     build = ":TSUpdate",
     config = function()
       local map = require("utils").map
       local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+      local ts_config = require("nvim-treesitter.configs")
+      local ts_context = require("treesitter-context")
 
-      require("nvim-treesitter.configs").setup({
+      local textobject_maps = {
+        { "af", "@function.outer" },
+        { "if", "@function.inner" },
+        { "ac", "@class.outer" },
+        { "ic", "@class.inner" },
+        { "ap", "@parameter.outer" },
+        { "ip", "@parameter.inner" },
+        { "ia", "@assignment.inner" },
+        { "aa", "@assignment.outer" },
+        { "it", "@attribute.inner" },
+        { "at", "@attribute.outer" },
+        { "ib", "@block.inner" },
+        { "ab", "@block.outer" },
+      }
+
+      local keymaps = {}
+      local goto_next_start = {}
+      local goto_previous_start = {}
+
+      for _, pair in ipairs(textobject_maps) do
+        keymaps[pair[1]] = pair[2]
+        goto_next_start["g" .. pair[1]] = pair[2]
+        goto_previous_start["<leader>g" .. pair[1]] = pair[2]
+      end
+
+      ts_config.setup({
         ensure_installed = {
           "lua",
           "typescript",
@@ -41,52 +69,13 @@ return {
           select = {
             enable = true,
             lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-              ["ap"] = "@parameter.outer",
-              ["ip"] = "@parameter.inner",
-              ["ia"] = "@assignment.inner",
-              ["aa"] = "@assignment.outer",
-              ["it"] = "@attribute.inner",
-              ["at"] = "@attribute.outer",
-              ["ib"] = "@block.inner",
-              ["ab"] = "@block.outer",
-            },
+            keymaps = keymaps,
           },
           move = {
             enable = true,
             set_jumps = true,
-            goto_next_start = {
-              ["gaf"] = "@function.outer",
-              ["gif"] = "@function.inner",
-              ["gac"] = "@class.outer",
-              ["gic"] = "@class.inner",
-              ["gap"] = "@parameter.outer",
-              ["gip"] = "@parameter.inner",
-              ["gia"] = "@assignment.inner",
-              ["gaa"] = "@assignment.outer",
-              ["git"] = "@attribute.inner",
-              ["gat"] = "@attribute.outer",
-              ["gab"] = "@block.inner",
-              ["gib"] = "@block.inner",
-            },
-            goto_previous_start = {
-              ["<leader>gaf"] = "@function.outer",
-              ["<leader>gif"] = "@function.inner",
-              ["<leader>gac"] = "@class.outer",
-              ["<leader>gic"] = "@class.inner",
-              ["<leader>gap"] = "@parameter.outer",
-              ["<leader>gip"] = "@parameter.inner",
-              ["<leader>gia"] = "@assignment.inner",
-              ["<leader>gaa"] = "@assignment.outer",
-              ["<leader>git"] = "@attribute.inner",
-              ["<leader>gat"] = "@attribute.outer",
-              ["<leader>gab"] = "@block.outer",
-              ["<leader>gib"] = "@block.inner",
-            },
+            goto_next_start = goto_next_start,
+            goto_previous_start = goto_previous_start,
           },
           swap = {
             enable = true,
@@ -100,7 +89,24 @@ return {
         },
       })
 
+      ts_context.setup({
+        enable = true,
+        multiwindow = false,
+        max_lines = 2,
+        min_window_height = 1,
+        line_numbers = true,
+        multiline_threshold = 20,
+        trim_scope = "outer",
+        mode = "cursor",
+        separator = nil,
+        zindex = 20,
+        on_attach = nil,
+      })
+
       map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_next)
+      map({ "n" }, "[c", function()
+        ts_context.go_to_context(vim.v.count1)
+      end)
     end,
   },
 }
