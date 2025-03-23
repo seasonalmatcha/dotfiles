@@ -33,6 +33,10 @@ return {
       snacks.picker.grep_buffers()
     end)
 
+    map("n", ";l", function()
+      snacks.picker.grep()
+    end)
+
     map("n", ";e", function()
       snacks.picker.explorer()
     end)
