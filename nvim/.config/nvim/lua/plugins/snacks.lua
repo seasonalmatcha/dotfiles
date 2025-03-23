@@ -1,0 +1,52 @@
+return {
+  "folke/snacks.nvim",
+  config = function()
+    local map = require("utils").map
+    local snacks = require("snacks")
+
+    snacks.setup({
+      picker = {
+        prompt = "   ",
+        win = {
+          input = {
+            keys = {
+              ["<leader>s"] = { "edit_split", mode = { "i", "n" } },
+              ["<leader>v"] = { "edit_vsplit", mode = { "i", "n" } },
+              ["."] = { "toggle_hidden", mode = { "n" } },
+              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            },
+          },
+        },
+      },
+    })
+
+    map("n", ";f", function()
+      snacks.picker.files()
+    end)
+
+    map("n", ";b", function()
+      snacks.picker.buffers()
+    end)
+
+    map("n", ";s", function()
+      snacks.picker.grep_buffers()
+    end)
+
+    map("n", ";e", function()
+      snacks.picker.explorer()
+    end)
+
+    map("n", ";h", function()
+      snacks.picker.help()
+    end)
+
+    map("n", ";j", function()
+      snacks.picker.jumps()
+    end)
+
+    map("n", ";g", function()
+      snacks.picker.git_status()
+    end)
+  end,
+}
