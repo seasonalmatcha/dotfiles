@@ -1,5 +1,6 @@
 return {
   "folke/snacks.nvim",
+  priority = 1000,
   config = function()
     local map = require("utils").map
     local snacks = require("snacks")
@@ -51,6 +52,10 @@ return {
 
     map("n", ";g", function()
       snacks.picker.git_status()
+    end)
+
+    map("n", ";t", function()
+      snacks.picker.todo_comments()
     end)
   end,
 }

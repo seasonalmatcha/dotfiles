@@ -6,7 +6,6 @@ return {
     opts = {
       keymap = {
         preset = "default",
-        ["<cr>"] = { "accept", "fallback" },
         ["<c-u>"] = { "scroll_documentation_up", "fallback" },
         ["<c-d>"] = { "scroll_documentation_down", "fallback" },
       },
