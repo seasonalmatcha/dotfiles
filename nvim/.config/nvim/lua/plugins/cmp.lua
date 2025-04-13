@@ -31,7 +31,13 @@ return {
           },
         },
       },
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = {
+          border = "rounded",
+          winhighlight = "Normal:FloatBorder",
+        },
+      },
     },
     opts_extend = { "sources.default" },
   },

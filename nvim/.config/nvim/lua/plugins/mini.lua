@@ -2,7 +2,7 @@ return {
   "echasnovski/mini.nvim",
   config = function()
     -- require("mini.ai").setup()
-    require("mini.pairs").setup()
+    -- require("mini.pairs").setup()
     require("mini.surround").setup()
 
     local indent = require("mini.indentscope")

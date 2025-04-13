@@ -47,3 +47,10 @@ opt.swapfile = false
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append("<>[]hl")
+
+opt.list = false
+opt.listchars = {
+  space = "⋅",
+  eol = "↩",
+  tab = "⇥ ",
+}

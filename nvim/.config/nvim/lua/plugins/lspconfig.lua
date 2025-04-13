@@ -46,9 +46,19 @@ return {
         "templ",
       }
 
+      local border = "rounded"
+
+      vim.diagnostic.config({
+        virtual_text = true,
+        jump = {
+          float = {
+            border = border,
+          },
+        },
+      })
+
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
-        local float_opts = { float = { border = "rounded" } }
 
         map("n", "gD", function()
           vim.lsp.buf.declaration()
@@ -70,10 +80,10 @@ return {
           vim.lsp.buf.type_definition()
         end, opts)
         map("n", "K", function()
-          vim.lsp.buf.hover()
+          vim.lsp.buf.hover({ border = border })
         end, opts)
         map("n", "<leader>ls", function()
-          vim.lsp.buf.signature_help()
+          vim.lsp.buf.signature_help({ border = border })
         end, opts)
         map("n", "<leader>D", function()
           vim.lsp.buf.type_definition()
@@ -82,16 +92,16 @@ return {
           vim.lsp.buf.code_action()
         end, opts)
         map("n", "[d", function()
-          vim.diagnostic.goto_prev(float_opts)
+          vim.diagnostic.jump({ count = -1 })
         end, opts)
         map("n", "]d", function()
-          vim.diagnostic.goto_next(float_opts)
+          vim.diagnostic.jump({ count = 1 })
         end, opts)
         map("n", "<leader>kk", function()
-          vim.diagnostic.goto_prev(float_opts)
+          vim.diagnostic.jump({ count = -1 })
         end, opts)
         map("n", "<leader>jj", function()
-          vim.diagnostic.goto_next(float_opts)
+          vim.diagnostic.jump({ count = 1 })
         end, opts)
         map("n", "<leader>lr", "<cmd> LspRestart <cr>")
       end
@@ -103,7 +113,16 @@ return {
         })
       end
 
+      require("flutter-tools").setup({
+        lsp = {
+          on_attach = on_attach,
+          capabilities = blink.get_lsp_capabilities(),
+        },
+      })
+
       lspconfig.lua_ls.setup({
+        on_attach = on_attach,
+        capabilities = blink.get_lsp_capabilities(),
         settings = {
           Lua = {
             diagnostics = {
@@ -121,13 +140,6 @@ return {
           },
         },
       })
-
-      local win_style = {
-        border = "rounded",
-      }
-
-      require("lspconfig.ui.windows").default_options = win_style
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, win_style)
     end,
   },
 }

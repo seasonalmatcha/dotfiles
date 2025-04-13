@@ -11,8 +11,8 @@ return {
         win = {
           input = {
             keys = {
-              ["<leader>s"] = { "edit_split", mode = { "i", "n" } },
-              ["<leader>v"] = { "edit_vsplit", mode = { "i", "n" } },
+              ["<leader>s"] = { "edit_split", mode = { "n" } },
+              ["<leader>v"] = { "edit_vsplit", mode = { "n" } },
               ["."] = { "toggle_hidden", mode = { "n" } },
               ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
               ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
@@ -56,6 +56,10 @@ return {
 
     map("n", ";t", function()
       snacks.picker.todo_comments()
+    end)
+
+    map("n", ";r", function()
+      snacks.picker.registers()
     end)
   end,
 }

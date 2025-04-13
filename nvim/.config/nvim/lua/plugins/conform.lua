@@ -19,6 +19,7 @@ return {
         markdown = js_formatter,
         go = { "gofumpt", "goimports-reviser", "golines" },
         prisma = { "prismaFmt" },
+        dart = { "dart_format" },
         ["_"] = { "trim_whitespace" },
       },
       format_on_save = {
