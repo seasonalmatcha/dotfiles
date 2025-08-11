@@ -3,7 +3,7 @@ return {
   config = function()
     local map = require("utils").map
     local duck = require("duck")
-    local chars = { "🦆", "🦀", "🐈", "🐎", "🦖", "🐤" }
+    local chars = { "🦆", "🦀", "🐈", "🐎", "🦖", "🐥", "🦋", "🐒", "🦟", "🐙", "🐖", "🐉" }
 
     map("n", "<leader>pp", function()
       duck.hatch()
