@@ -6,7 +6,7 @@ return {
     local map = utils.map
     local aucmd = utils.aucmd
     local conform = require("conform")
-    local js_formatter = { "prettierd", "prettier", stop_after_first = true }
+    local js_formatter = { "prettier", stop_after_first = true }
 
     conform.setup({
       formatters_by_ft = {
@@ -20,6 +20,7 @@ return {
         go = { "gofumpt", "goimports-reviser", "golines" },
         prisma = { "prismaFmt" },
         dart = { "dart_format" },
+        rust = { "rustfmt" },
         ["_"] = { "trim_whitespace" },
       },
       format_on_save = {

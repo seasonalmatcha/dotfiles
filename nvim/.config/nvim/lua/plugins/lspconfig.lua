@@ -44,6 +44,7 @@ return {
         "emmet_language_server",
         "gopls",
         "templ",
+        "rust_analyzer",
       }
 
       local border = "rounded"

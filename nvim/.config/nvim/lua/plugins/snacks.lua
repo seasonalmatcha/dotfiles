@@ -6,6 +6,7 @@ return {
     local snacks = require("snacks")
 
     snacks.setup({
+      bigfile = {},
       picker = {
         prompt = "   ",
         win = {
