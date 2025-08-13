@@ -4,11 +4,15 @@ return {
   config = function()
     local aucmd = require("utils").aucmd
 
+    local js_formatter = { "biomejs" }
+    -- In case need to use eslint
+    -- local js_formatter = { "eslint" }
+
     require("lint").linters_by_ft = {
-      javascript = { "eslint" },
-      javascriptreact = { "eslint" },
-      typescript = { "eslint" },
-      typescriptreact = { "eslint" },
+      javascript = js_formatter,
+      javascriptreact = js_formatter,
+      typescript = js_formatter,
+      typescriptreact = js_formatter,
       go = { "golangcilint" },
     }
 

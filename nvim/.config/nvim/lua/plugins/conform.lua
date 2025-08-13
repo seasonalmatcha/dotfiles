@@ -6,7 +6,9 @@ return {
     local map = utils.map
     local aucmd = utils.aucmd
     local conform = require("conform")
-    local js_formatter = { "prettier", stop_after_first = true }
+    local js_formatter = { "biome", "biome-organize-imports" }
+    -- In case need to use eslint
+    -- local js_formatter = { "prettier", stop_after_first = true }
 
     conform.setup({
       formatters_by_ft = {
@@ -16,7 +18,6 @@ return {
         javascript = js_formatter,
         javascriptreact = js_formatter,
         json = js_formatter,
-        markdown = js_formatter,
         go = { "gofumpt", "goimports-reviser", "golines" },
         prisma = { "prismaFmt" },
         dart = { "dart_format" },
