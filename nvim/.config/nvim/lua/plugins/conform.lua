@@ -2,13 +2,18 @@ return {
   "stevearc/conform.nvim",
   event = "VeryLazy",
   config = function()
-    local utils = require("utils")
-    local map = utils.map
-    local aucmd = utils.aucmd
+    local map = require("utils").map
+    local aucmd = require("utils").aucmd
+    local has_file = require("utils").has_file
     local conform = require("conform")
-    local js_formatter = { "biome", "biome-organize-imports" }
-    -- In case need to use eslint
-    -- local js_formatter = { "prettier", stop_after_first = true }
+
+    local function js_formatter()
+      if has_file({ ".prettierrc", ".prettierrc.js", "prettier.config.js" }) then
+        return { "prettier", stop_after_first = true }
+      else
+        return { "biome", "biome-organize-imports" }
+      end
+    end
 
     conform.setup({
       formatters_by_ft = {
@@ -30,6 +35,19 @@ return {
         timeout_ms = 500,
       },
       formatters = {
+        biome = {
+          command = "biome",
+          args = function(_, ctx)
+            local project_config = vim.fn.findfile("biome.json", ".;")
+            local args = { "format", "--stdin-file-path", ctx.filename }
+            if project_config == "" then
+              table.insert(args, 2, "--config-path")
+              table.insert(args, 3, vim.fn.stdpath("config") .. "/biome.json")
+            end
+            return args
+          end,
+          stdin = true,
+        },
         prismaFmt = {
           command = "prisma-fmt",
           args = { "format" },
