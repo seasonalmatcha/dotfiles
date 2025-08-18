@@ -36,7 +36,14 @@ return {
       },
       formatters = {
         biome = {
-          command = "biome",
+          command = function()
+            local project_bin = vim.fn.fnamemodify("./node_modules/.bin/biome", ":p")
+            if vim.fn.executable(project_bin) == 1 then
+              return project_bin
+            end
+
+            return "biome"
+          end,
           args = function(_, ctx)
             local project_config = vim.fn.findfile("biome.json", ".;")
             local args = { "format", "--stdin-file-path", ctx.filename }
