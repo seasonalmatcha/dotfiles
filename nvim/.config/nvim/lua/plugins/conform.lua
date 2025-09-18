@@ -24,7 +24,7 @@ return {
         javascriptreact = js_formatter,
         json = js_formatter,
         go = { "gofumpt", "goimports-reviser", "golines" },
-        prisma = { "prismaFmt" },
+        prisma = { "prismals" },
         dart = { "dart_format" },
         rust = { "rustfmt" },
         ["_"] = { "trim_whitespace" },
@@ -54,10 +54,6 @@ return {
             return args
           end,
           stdin = true,
-        },
-        prismaFmt = {
-          command = "prisma-fmt",
-          args = { "format" },
         },
       },
     })
