@@ -27,7 +27,6 @@ return {
     config = function()
       local map = require("utils").map
       require("mason").setup()
-      local lspconfig = require("lspconfig")
       local blink = require("blink.cmp")
 
       vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -107,8 +106,9 @@ return {
         map("n", "<leader>lr", "<cmd> LspRestart <cr>")
       end
 
+      vim.lsp.enable(servers)
       for _, server in ipairs(servers) do
-        lspconfig[server].setup({
+        vim.lsp.config(server, {
           on_attach = on_attach,
           capabilities = blink.get_lsp_capabilities(),
         })
@@ -121,7 +121,8 @@ return {
         },
       })
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.enable("lua_ls")
+      vim.lsp.config("lua_ls", {
         on_attach = on_attach,
         capabilities = blink.get_lsp_capabilities(),
         settings = {
@@ -131,6 +132,7 @@ return {
             },
             workspace = {
               library = {
+                ["${3rd}/luv/library"] = true,
                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                 [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                 [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
