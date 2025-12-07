@@ -33,6 +33,7 @@ return {
         javascript = js_formatter,
         javascriptreact = js_formatter,
         json = js_formatter,
+        html = { "prettier" },
         go = { "gofumpt", "goimports-reviser", "golines" },
         prisma = { "prismals" },
         dart = { "dart_format" },
