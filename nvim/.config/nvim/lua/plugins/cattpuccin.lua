@@ -21,35 +21,13 @@ return {
         no_italic = false,
         no_bold = false,
         no_underline = false,
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-          loops = {},
-          functions = {},
-          keywords = {},
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = {},
-          operators = {},
-        },
-        color_overrides = {},
-        custom_highlights = {},
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          treesitter = true,
-          harpoon = true,
-          indent_blankline = {
-            enabled = true,
-            scope_color = "",
-            colored_indent_levels = false,
+        color_overrides = {
+          all = {
+            mantle = "#000000",
           },
-          neotest = true,
-          neotree = true,
         },
+        custom_highlights = {},
+        auto_integrations = true,
       })
 
       vim.cmd.colorscheme("catppuccin")
