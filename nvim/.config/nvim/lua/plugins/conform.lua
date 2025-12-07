@@ -8,7 +8,17 @@ return {
     local conform = require("conform")
 
     local function js_formatter()
-      if has_file({ ".prettierrc", ".prettierrc.js", "prettier.config.js" }) then
+      if
+        has_file({
+          ".prettierrc",
+          ".prettierrc.js",
+          ".prettierrc.json",
+          "prettierrc.json",
+          "prettier.config.js",
+          "prettier.config.ts",
+          "prettier.config.mjs",
+        })
+      then
         return { "prettier", stop_after_first = true }
       else
         return { "biome", "biome-organize-imports" }
