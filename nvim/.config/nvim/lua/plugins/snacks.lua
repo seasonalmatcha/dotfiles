@@ -6,7 +6,13 @@ return {
     local snacks = require("snacks")
 
     snacks.setup({
-      bigfile = {},
+      indent = {
+        animate = {
+          enabled = false,
+        },
+      },
+      image = {},
+      notifier = {},
       picker = {
         prompt = "   ",
         win = {
@@ -59,8 +65,34 @@ return {
       snacks.picker.todo_comments()
     end)
 
+    map("n", ";q", function()
+      snacks.picker.qflist()
+    end)
+
+    map("n", ";m", function()
+      snacks.picker.marks()
+    end)
+
     map("n", ";r", function()
       snacks.picker.registers()
     end)
+
+    map("n", ";v", function()
+      snacks.picker.cliphist()
+    end)
+
+    vim.api.nvim_create_autocmd("LspProgress", {
+      callback = function(ev)
+        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+        vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
+          id = "lsp_progress",
+          title = "LSP Progress",
+          opts = function(notif)
+            notif.icon = ev.data.params.value.kind == "end" and " "
+              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+          end,
+        })
+      end,
+    })
   end,
 }
