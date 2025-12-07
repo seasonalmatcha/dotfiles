@@ -7,8 +7,8 @@ return {
 
     prozez:setup({
       win_opts = {
-        height = 80,
-        width = 80,
+        height = 90,
+        width = 90,
       },
     })
 
@@ -23,10 +23,6 @@ return {
         prozez:exec(cmd[3], cmd[4])
       end)
     end
-
-    map({ "n" }, "<leader>ll", function()
-      prozez:toggle_terminal()
-    end)
 
     map({ "n", "t" }, "<a-l>", function()
       prozez:toggle_terminal()
